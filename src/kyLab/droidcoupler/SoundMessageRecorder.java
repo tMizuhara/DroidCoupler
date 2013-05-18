@@ -10,7 +10,8 @@ public class SoundMessageRecorder {
 	final static int SAMPLING_RATE = 44100;
 	private AudioRecord audioRec = null;
 	private int bufSize = 0;
-	private boolean isRecording = false;
+	public boolean isRecordingSuccess = false;
+	public boolean isRecordingStop = false;
 
 	SoundMessageRecorder() {
 		// calculate buffer size
