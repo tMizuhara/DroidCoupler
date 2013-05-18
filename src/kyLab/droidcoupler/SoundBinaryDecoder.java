@@ -73,7 +73,7 @@ public class SoundBinaryDecoder {
 		return -1;
 	}
 	
-	public byte vote(byte[] results, int threshold){
+	public byte vote(byte[] results){
 		int[] counter = {0, 0, 0};
 		for(int i = 0; i < results.length; i++)
 		{
@@ -91,11 +91,8 @@ public class SoundBinaryDecoder {
 				maxCount = counter[i];
 			}
 		}
-		if(maxCount > threshold)
-		{
-			return maxType;
-		}
-		return -1;
+		
+		return maxType;
 	}
 	
 	public Boolean checkStart(double[] sound)
@@ -109,6 +106,7 @@ public class SoundBinaryDecoder {
 		{
 			if(startCount >= 6)
 			{
+				startCount = 0;
 				return true;
 			}
 			startCount = 0;
