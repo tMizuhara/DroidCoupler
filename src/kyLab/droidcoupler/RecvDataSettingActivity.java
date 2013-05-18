@@ -63,6 +63,7 @@ public class RecvDataSettingActivity extends Activity implements Runnable{
 	public void recvText(View view)
 	{
 		recvProgressDialog = new ProgressDialog(this);
+		recvProgressDialog.setCancelable(false);
 		recvProgressDialog.setMessage("データ受信中...");
 		recvProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		recvProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "中断", 
@@ -74,12 +75,12 @@ public class RecvDataSettingActivity extends Activity implements Runnable{
 		});
 		recvProgressDialog.show();
 		
-		soundMessageRecorder = new SoundMessageRecorder();
 		thread = new Thread(this);
 		thread.start();
 	}
 	
 	public void run() {
+		soundMessageRecorder = new SoundMessageRecorder();
 		soundMessageRecorder.getSoundMessage();
 		
 		while(true){
@@ -96,6 +97,7 @@ public class RecvDataSettingActivity extends Activity implements Runnable{
 			}
 		}
 		
+		soundMessageRecorder = null;
 	}
 	
 	private Handler handler = new Handler() {

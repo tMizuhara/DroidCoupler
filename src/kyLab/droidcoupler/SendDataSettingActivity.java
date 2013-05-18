@@ -60,6 +60,7 @@ public class SendDataSettingActivity extends Activity implements Runnable{
 		sendProgressDialog = new ProgressDialog(this);
 		sendProgressDialog.setMessage("データ送信中...");
 		sendProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		sendProgressDialog.setCancelable(false);
 		sendProgressDialog.show();
 		
 		thread = new Thread(this);
