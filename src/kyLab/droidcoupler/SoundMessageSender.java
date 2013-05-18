@@ -32,7 +32,7 @@ public class SoundMessageSender {
 		sendHeaderSound(HeaderSound.START);
 
 		for (int i = 0; i < inputMessage.length; i++) {
-			encoder.encByteSound(inputMessage[i], soundData);
+			encoder.encByteSoundSimple(inputMessage[i], soundData);
 			track.write(soundData, 0, soundData.length);
 
 			if (track.getPlayState() == android.media.AudioTrack.PLAYSTATE_PLAYING) {
@@ -47,11 +47,6 @@ public class SoundMessageSender {
 	}
 	
 	private void sendHeaderSound(HeaderSound headerType) {
-		if (track.getPlayState() == android.media.AudioTrack.PLAYSTATE_PLAYING) {
-			track.stop();
-			track.reloadStaticData();
-		}
-		
 		switch (headerType) {
 		case START:
 			track.write(encoder.genStartSound(), 0, encoder.genStartSound().length);
@@ -62,6 +57,12 @@ public class SoundMessageSender {
 		default:
 			break;
 		}
+		
+		if (track.getPlayState() == android.media.AudioTrack.PLAYSTATE_PLAYING) {
+			track.stop();
+			track.reloadStaticData();
+		}
+		
 		track.play();
 	}
 }

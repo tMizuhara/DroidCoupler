@@ -90,9 +90,9 @@ public class BinarySoundEncoder {
 	//
 	public byte[] genStartSound() {
 		byte[] sound = new byte[SoundParam.PACKET_SIZE];
-		int t = 2 * SoundParam.SAMPLES_PER_BIT;
+		int t = (8 - 2) * SoundParam.SAMPLES_PER_BIT;
 
-		for (int bit = 2; bit < 8; ++bit) {
+		for (int bit = (8 - 2); bit < 8; ++bit) {
 			System.arraycopy(sinWave_s, 0, sound, t, SoundParam.SAMPLES_PER_BIT);
 			t += SoundParam.SAMPLES_PER_BIT;
 		}
@@ -104,9 +104,9 @@ public class BinarySoundEncoder {
 	//
 	public byte[] genEndSound() {
 		byte[] sound = new byte[SoundParam.PACKET_SIZE];
-		int t = (8 - 2) * SoundParam.SAMPLES_PER_BIT;
+		int t = 0 * SoundParam.SAMPLES_PER_BIT;
 
-		for (int bit = (8 - 2); bit < 8; ++bit) {
+		for (int bit = 0; bit < 2; ++bit) {
 			System.arraycopy(sinWave_e, 0, sound, t, SoundParam.SAMPLES_PER_BIT);
 			t += SoundParam.SAMPLES_PER_BIT;
 		}
