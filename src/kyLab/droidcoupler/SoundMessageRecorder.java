@@ -27,13 +27,13 @@ public class SoundMessageRecorder {
 		// start recording
 		Log.d("SoundMessageRecoder", "startRecording");
 		audioRec.startRecording();
-		isRecording = true;
+		isRecordingSuccess = true;
 		// recording thread
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				byte buf[] = new byte[bufSize];
-				while (isRecording) {
+				while (isRecordingSuccess) {
 					audioRec.read(buf, 0, buf.length);
 					Log.d("SoundMessageRecoder", "read " + buf.length + " bytes");
 					
@@ -47,8 +47,8 @@ public class SoundMessageRecorder {
 	}
 
 	public void stopRecording() {
-		if (isRecording) {
-			isRecording = false;
+		if (isRecordingSuccess) {
+			isRecordingSuccess = false;
 		}
 	}
 }
