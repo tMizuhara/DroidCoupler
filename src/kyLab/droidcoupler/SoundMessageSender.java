@@ -18,22 +18,22 @@ public class SoundMessageSender {
 	SoundMessageSender() {
 		Log.d("SoundMessageSender", "sampling_rate:" + SoundParam.SAMPLING_RATE);
 		Log.d("SoundMessageSender", "bps:" + SoundParam.BPS);
-		Log.d("SoundMessageSender", "number_of_samples:" + SoundParam.NUMBER_OF_SAMPLES);
+		//Log.d("SoundMessageSender", "number_of_samples:" + SoundParam.NUMBER_OF_SAMPLES);
 		
 		if (track == null) {
 			// track = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
 			// AudioFormat.CHANNEL_CONFIGURATION_DEFAULT,
 			// AudioFormat.ENCODING_DEFAULT, 44100, AudioTrack.MODE_STATIC);
-			track = new AudioTrack(AudioManager.STREAM_MUSIC, SoundParam.NUMBER_OF_SAMPLES,
+			track = new AudioTrack(AudioManager.STREAM_MUSIC, SoundParam.SAMPLING_RATE,
 					AudioFormat.CHANNEL_OUT_DEFAULT,
-					AudioFormat.ENCODING_DEFAULT, SoundParam.NUMBER_OF_SAMPLES, AudioTrack.MODE_STATIC);
+					AudioFormat.ENCODING_DEFAULT, SoundParam.SAMPLING_RATE, AudioTrack.MODE_STATIC);
 		}
 		
 		encoder = new BinarySoundEncoder();
 	}
 
 	public void sendSoundMessage(byte[] inputMessage) {
-		byte[] soundData = new byte[SoundParam.NUMBER_OF_SAMPLES];
+		byte[] soundData = new byte[SoundParam.SAMPLING_RATE];
 
 		for (int i = 0; i < inputMessage.length; i++) {
 			encoder.encByteSound(inputMessage[i], soundData);
