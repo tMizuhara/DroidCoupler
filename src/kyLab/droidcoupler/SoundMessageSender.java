@@ -22,7 +22,7 @@ public class SoundMessageSender {
 	}
 
 	public void sendSoundMessage(byte[] inputMessage) {
-		byte[] soundData = new byte[SoundParam.SAMPLING_RATE];
+		byte[] soundData = new byte[SoundParam.PACKET_SIZE];
 
 		for (int i = 0; i < inputMessage.length; i++) {
 			encoder.encByteSound(inputMessage[i], soundData);
