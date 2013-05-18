@@ -9,8 +9,12 @@ public class SoundBinaryDecoder {
 	byte[] sinWave_e;	// end bit array
 	byte[] sinWave_0;	// 0 bit array
 	byte[] sinWave_1;	// 1 bit array
+	
+	private int startCount;
 
 	SoundBinaryDecoder() {
+		startCount = 0;
+		
 		sinWave_s = new byte[SoundParam.SAMPLES_PER_BIT];
 		sinWave_e = new byte[SoundParam.SAMPLES_PER_BIT];
 		sinWave_0 = new byte[SoundParam.SAMPLES_PER_BIT];
@@ -92,5 +96,24 @@ public class SoundBinaryDecoder {
 			return maxType;
 		}
 		return -1;
+	}
+	
+	public Boolean checkStart(double[] sound)
+	{
+		byte res = decSoundByte(sound);
+		if(res == 2)
+		{
+			startCount++;
+		}
+		else
+		{
+			if(startCount >= 6)
+			{
+				return true;
+			}
+			startCount = 0;
+		}
+		
+		return false;
 	}
 }
