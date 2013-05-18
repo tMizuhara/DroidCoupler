@@ -9,6 +9,8 @@ import android.support.v4.app.NavUtils;
 
 public class SendingActivity extends Activity {
 
+	private SoundMessageSender soundMessageSender;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -16,9 +18,13 @@ public class SendingActivity extends Activity {
 		Intent intent = getIntent();
 		byte[] sendingData = intent.getByteArrayExtra(SendDataSettingActivity.EXTRA_SENDING_DATA);
 		
+		soundMessageSender = new SoundMessageSender();
+		
 		setContentView(R.layout.activity_sending);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		soundMessageSender.sendSoundMessage(sendingData);
 	}
 
 	/**
