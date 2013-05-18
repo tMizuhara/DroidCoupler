@@ -9,6 +9,7 @@ public class SoundMessageSender {
 
 	private AudioTrack track = null;
 	private byte[] sendingData = { 1, 2, 3, 4, 5 };
+	private BinarySoundEncoder encoder;
 	
 	private static int SAMPLING_RATE = 441000;
 	private static int BPS = 10;
@@ -27,13 +28,15 @@ public class SoundMessageSender {
 					AudioFormat.CHANNEL_OUT_DEFAULT,
 					AudioFormat.ENCODING_DEFAULT, NUMBER_OF_SAMPLES, AudioTrack.MODE_STATIC);
 		}
+		
+		encoder = new BinarySoundEncoder();
 	}
 
 	public void sendSoundMessage(byte[] inputMessage) {
 		byte[] soundData = new byte[NUMBER_OF_SAMPLES];
 
 		for (int i = 0; i < sendingData.length; i++) {
-			encByteSound(sendingData[i], soundData);
+			encoder.encByteSound(sendingData[i], soundData);
 			track.write(soundData, 0, soundData.length);
 
 			if (track.getPlayState() == android.media.AudioTrack.PLAYSTATE_PLAYING) {
@@ -43,9 +46,4 @@ public class SoundMessageSender {
 			track.play();
 		}
 	}
-	
-	private void encByteSound(byte data, byte[] sound) {
-		
-	}
-
 }
