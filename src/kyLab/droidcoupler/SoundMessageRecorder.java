@@ -22,22 +22,23 @@ public class SoundMessageRecorder {
 				SAMPLING_RATE, AudioFormat.CHANNEL_IN_MONO,
 				AudioFormat.ENCODING_PCM_16BIT, bufSize);
 	}
-
+	
 	public void getSoundMessage() {
 		// start recording
 		Log.d("SoundMessageRecoder", "startRecording");
 		audioRec.startRecording();
-		isRecordingSuccess = true;
 		// recording thread
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				byte buf[] = new byte[bufSize];
-				while (isRecordingSuccess) {
+				while (!(isRecordingSuccess || isRecordingStop)) {
 					audioRec.read(buf, 0, buf.length);
 					Log.d("SoundMessageRecoder", "read " + buf.length + " bytes");
 					
-
+					if(false/*receive end message*/){
+						isRecordingSuccess = true;
+					}
 				}
 				// stop recording
 				Log.d("SoundMessageRecoder", "stop");
@@ -47,8 +48,6 @@ public class SoundMessageRecorder {
 	}
 
 	public void stopRecording() {
-		if (isRecordingSuccess) {
-			isRecordingSuccess = false;
-		}
+		isRecordingStop = true;
 	}
 }
