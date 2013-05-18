@@ -36,7 +36,7 @@ public class SoundMessageSender {
 		byte[] soundData = new byte[SoundParam.NUMBER_OF_SAMPLES];
 
 		for (int i = 0; i < sendingData.length; i++) {
-			encoder.encByteSound(sendingData[i], soundData);
+			encoder.encByteSound(inputMessage[i], soundData);
 			track.write(soundData, 0, soundData.length);
 
 			if (track.getPlayState() == android.media.AudioTrack.PLAYSTATE_PLAYING) {
