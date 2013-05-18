@@ -6,8 +6,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="send_mode">送信モード</string>
     <string name="recv_mode">受信モード</string>
-    <string name="title_activity_select_send_data">送信データ設定</string>
-    <string name="text_mode_header">テキストを送信する</string>
+    <string name="title_activity_select_send_data">データ送信設定</string>
     <string name="send">送信</string>
-
+    <string name="title_activity_recv_data_setting">データ受信設定</string>
+    <string name="text_send_mode_header">テキストを送信する</string>
+	<string name="text_recv_mode_header">テキストを受信する</string>
+	<string name="recv">受信</string>
 </resources>

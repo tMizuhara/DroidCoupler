@@ -6,32 +6,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SendDataSettingActivity" >
+    tools:context=".RecvDataSettingActivity" >
 
     <TextView
-        android:id="@+id/sendModetHeaderTextView"
+        android:id="@+id/recvModeHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_send_mode_header" />
-
-    <EditText
-        android:id="@+id/editSendText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/sendModetHeaderTextView"
-        android:layout_below="@+id/sendModetHeaderTextView"
-        android:layout_marginTop="26dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        android:text="@string/text_recv_mode_header" />
 
     <Button
-        android:id="@+id/sendTextButton"
+        android:id="@+id/recvTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editSendText"
+        android:layout_below="@+id/recvModeHeaderTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="@string/send" 
-        android:onClick="sendText" />
+        android:layout_marginTop="31dp"
+        android:onClick="recvText"
+        android:text="@string/recv" />
+
+    <TextView
+        android:id="@+id/recvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recvTextButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:text=""
+        android:textIsSelectable="true" />
 
 </RelativeLayout>

@@ -25,6 +25,7 @@
         android:layout_alignLeft="@+id/send_button"
         android:layout_below="@+id/send_button"
         android:layout_marginTop="40dp"
-        android:text="@string/recv_mode" />
+        android:text="@string/recv_mode" 
+        android:onClick="selectRecvMode" />
 
 </RelativeLayout>

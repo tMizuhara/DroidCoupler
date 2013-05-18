@@ -20,9 +20,14 @@ public class ModeSelectionActivity extends Activity {
 		getMenuInflater().inflate(R.menu.mode_selection, menu);
 		return true;
 	}
-	
-	public void selectSendMode(View view){
+
+	public void selectSendMode(View view) {
 		Intent intent = new Intent(this, SendDataSettingActivity.class);
+		startActivity(intent);
+	}
+
+	public void selectRecvMode(View view) {
+		Intent intent = new Intent(this, RecvDataSettingActivity.class);
 		startActivity(intent);
 	}
 
