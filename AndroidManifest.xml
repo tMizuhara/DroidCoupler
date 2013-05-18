@@ -30,6 +30,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kyLab.droidcoupler.ModeSelectionActivity" />
         </activity>
+        <activity
+            android:name="kyLab.droidcoupler.RecvDataSettingActivity"
+            android:label="@string/title_activity_recv_data_setting"
+            android:parentActivityName="kyLab.droidcoupler.ModeSelectionActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="kyLab.droidcoupler.ModeSelectionActivity" />
+        </activity>
     </application>
 
 </manifest>
