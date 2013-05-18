@@ -35,7 +35,7 @@ public class SoundMessageSender {
 	public void sendSoundMessage(byte[] inputMessage) {
 		byte[] soundData = new byte[SoundParam.NUMBER_OF_SAMPLES];
 
-		for (int i = 0; i < sendingData.length; i++) {
+		for (int i = 0; i < inputMessage.length; i++) {
 			encoder.encByteSound(inputMessage[i], soundData);
 			track.write(soundData, 0, soundData.length);
 
