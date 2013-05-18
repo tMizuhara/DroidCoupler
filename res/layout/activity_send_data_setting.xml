@@ -9,8 +9,29 @@
     tools:context=".SendDataSettingActivity" >
 
     <TextView
+        android:id="@+id/sendModetHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/text_mode_header" />
+
+    <EditText
+        android:id="@+id/editSendText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sendModetHeaderTextView"
+        android:layout_below="@+id/sendModetHeaderTextView"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/sendTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editSendText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/send" 
+        android:onClick="sendText" />
 
 </RelativeLayout>

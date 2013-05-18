@@ -5,18 +5,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.support.v4.app.NavUtils;
-import android.widget.EditText;
 
-public class SendDataSettingActivity extends Activity {
-
-	public static final String EXTRA_SENDING_DATA = "kyLab.droidCoupler.SENDING_DATA";
+public class SendingActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_send_data_setting);
+		
+		Intent intent = getIntent();
+		byte[] sendingData = intent.getByteArrayExtra(SendDataSettingActivity.EXTRA_SENDING_DATA);
+		
+		setContentView(R.layout.activity_sending);
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
@@ -33,7 +33,7 @@ public class SendDataSettingActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.send_data_setting, menu);
+		getMenuInflater().inflate(R.menu.sending, menu);
 		return true;
 	}
 
@@ -54,11 +54,4 @@ public class SendDataSettingActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void sendText(View view) {
-		Intent intent = new Intent(this, SendingActivity.class);
-		EditText editText = (EditText)findViewById(R.id.editSendText);
-		byte[] sendingData = (editText.getText().toString()).getBytes();
-		intent.putExtra(EXTRA_SENDING_DATA, sendingData);
-		startActivity(intent);
-	}
 }
