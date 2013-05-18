@@ -1,11 +1,10 @@
 package kyLab.droidcoupler;
 
-//import android.util.Log;
-//import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
+import android.util.Log;
+import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
 
 public class SoundBinaryDecoder {
 
-	/*
 	byte[] sinWave_s;	// start bit array
 	byte[] sinWave_e;	// end bit array
 	byte[] sinWave_0;	// 0 bit array
@@ -34,9 +33,9 @@ public class SoundBinaryDecoder {
 	//
 	//public void decSoundByte(double[] data, double[] sound)
 	public void decSoundByte(double[] sound) {
-		Log.d("FFT", "test");
-		int FFT_SIZE = sound.length;		
+		int FFT_SIZE = sound.length;
 		DoubleFFT_1D fft = new DoubleFFT_1D(FFT_SIZE);
+		Log.d("FFT", "test");
 		fft.realForward(sound);
 		
 		// data[n]:real, data[n+1}:complex, n=0~N-1
@@ -44,6 +43,5 @@ public class SoundBinaryDecoder {
 			Log.d("FFT", "i=" + i + " val=" + sound[i]);
 		}
 	}
-	*/
 
 }
