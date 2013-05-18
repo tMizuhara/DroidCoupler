@@ -16,7 +16,7 @@ public class BinarySoundEncoder {
 		double f0 = SoundParam.freq_0;
 		double f1 = SoundParam.freq_1;
 		int L = SoundParam.SAMPLING_RATE;
-		int dL = SoundParam.NUMBER_OF_SAMPLES;
+		int dL = SoundParam.SAMPLING_RATE / SoundParam.BPS;	// samples per bit
 		int t = 0;
 
 		Log.d("encode", "data = " + data);
