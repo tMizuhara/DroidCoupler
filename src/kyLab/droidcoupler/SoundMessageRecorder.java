@@ -15,11 +15,11 @@ public class SoundMessageRecorder {
 	SoundMessageRecorder() {
 		// calculate buffer size
 		bufSize = AudioRecord.getMinBufferSize(SAMPLING_RATE,
-				AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_DEFAULT) * 2;
+				AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * 2;
 		Log.d("SoundMessageRecoder", "bufSize = " + bufSize);
 		audioRec = new AudioRecord(MediaRecorder.AudioSource.MIC,
-				SAMPLING_RATE, AudioFormat.CHANNEL_IN_DEFAULT,
-				AudioFormat.ENCODING_DEFAULT, bufSize);
+				SAMPLING_RATE, AudioFormat.CHANNEL_IN_MONO,
+				AudioFormat.ENCODING_PCM_16BIT, bufSize);
 	}
 
 	public void getSoundMessage() {
@@ -35,6 +35,7 @@ public class SoundMessageRecorder {
 				while (isRecording) {
 					audioRec.read(buf, 0, buf.length);
 					Log.d("SoundMessageRecoder", "read " + buf.length + " bytes");
+					
 
 				}
 				// stop recording
