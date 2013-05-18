@@ -9,6 +9,10 @@ public class SoundMessageSender {
 
 	private AudioTrack track = null;
 	private BinarySoundEncoder encoder;
+	private enum HeaderSound {
+		START,
+		END,
+	}
 
 	SoundMessageSender() {
 		Log.d("SoundMessageSender", "sampling_rate:" + SoundParam.SAMPLING_RATE);
@@ -23,6 +27,9 @@ public class SoundMessageSender {
 
 	public void sendSoundMessage(byte[] inputMessage) {
 		byte[] soundData = new byte[SoundParam.PACKET_SIZE];
+		
+		// send start sound data
+		sendHeaderSound(HeaderSound.START);
 
 		for (int i = 0; i < inputMessage.length; i++) {
 			encoder.encByteSound(inputMessage[i], soundData);
@@ -34,5 +41,27 @@ public class SoundMessageSender {
 			}
 			track.play();
 		}
+		
+		// send end sound data
+		sendHeaderSound(HeaderSound.END);
+	}
+	
+	private void sendHeaderSound(HeaderSound headerType) {
+		if (track.getPlayState() == android.media.AudioTrack.PLAYSTATE_PLAYING) {
+			track.stop();
+			track.reloadStaticData();
+		}
+		
+		switch (headerType) {
+		case START:
+			track.write(encoder.genStartSound(), 0, encoder.genStartSound().length);
+			break;
+		case END:
+			track.write(encoder.genEndSound(), 0, encoder.genEndSound().length);
+			break;
+		default:
+			break;
+		}
+		track.play();
 	}
 }
