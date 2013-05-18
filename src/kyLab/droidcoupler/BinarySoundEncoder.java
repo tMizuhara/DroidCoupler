@@ -10,7 +10,7 @@ public class BinarySoundEncoder {
 	byte[] sinWave_1;	// 1 bit array
 	
 	// test
-	private SoundBinaryDecoder decoder;
+	//private SoundBinaryDecoder decoder;
 
 	BinarySoundEncoder() {
 		sinWave_s = new byte[SoundParam.SAMPLES_PER_BIT];
@@ -29,15 +29,20 @@ public class BinarySoundEncoder {
 					* SoundParam.freq_1 * i / SoundParam.SAMPLING_RATE));
 		}
 
-		/*
+		
 		// test
+		/*
 		decoder = new SoundBinaryDecoder();
 		double[] test = new double[256];
-		for (int i = 0; i < ; ++i)
-		System.arraycopy(sinWave_s, 0, test, 0, 256);
+		for (int i = 0; i < 256; ++i)
+		{
+			test[i] = sinWave_s[i];
+		}
+		//System.arraycopy(sinWave_s, 0, test, 0, 256);
 		Log.d("FFT", "test0 size:" + test.length);
 		decoder.decSoundByte(test);
 		*/
+		
 	}
 
 	//
