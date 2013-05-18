@@ -6,6 +6,7 @@ public class SoundParam {
 	public static int BPS = 10;
 	public static int NUMBER_OF_SAMPLES = (int) (SAMPLING_RATE * (1.0 / BPS));
 
+	// Frequency should be integral multiples of (bps / sampling_rate / 2).
 	public static double freq_s = 200;		// start bit[Hz]
 	public static double freq_0 = 100;		// binary [Hz]
 	public static double freq_1 = 300;		// binary [Hz]
