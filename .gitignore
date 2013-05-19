@@ -27,3 +27,8 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+# added
+.DS_Store
+vendor/DS_Store
+libs/DS_Store
