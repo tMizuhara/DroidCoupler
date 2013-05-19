@@ -81,11 +81,11 @@ public class RecvDataSettingActivity extends Activity implements Runnable{
 	
 	public void run() {
 		soundMessageRecorder = new SoundMessageRecorder();
-		soundMessageRecorder.getSoundMessage();
+		soundMessageRecorder.recordSoundMessage();
 		
 		while(true){
 			if(soundMessageRecorder.isRecordingSuccess){
-				byte[] recvData = "test".getBytes();
+				byte[] recvData = soundMessageRecorder.out;
 				recvText = null;
 				recvText = new String(recvData);
 				
