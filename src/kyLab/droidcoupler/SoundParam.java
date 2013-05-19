@@ -10,6 +10,7 @@ public class SoundParam {
 	public static int PACKET_BITS = 11;
 	// Number of samples per packet data
 	public static int PACKET_SIZE = PACKET_BITS * SAMPLES_PER_BIT;
+	public static int FFT_SIZE = 256;
 
 	// Half of period (2/f) should be integral divisions of sound window
 	// (s/bit).

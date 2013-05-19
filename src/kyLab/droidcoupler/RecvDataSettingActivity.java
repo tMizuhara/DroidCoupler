@@ -85,7 +85,7 @@ public class RecvDataSettingActivity extends Activity implements Runnable{
 		
 		while(true){
 			if(soundMessageRecorder.isRecordingSuccess){
-				byte[] recvData = soundMessageRecorder.out;
+				byte[] recvData = soundMessageRecorder.recordingBinaryData;
 				recvText = null;
 				recvText = new String(recvData);
 				
