@@ -106,28 +106,4 @@ public class SoundMessageRecorder {
 			recordingBinaryData[i] = -1;
 		}
 	}
-	
-	private int convertSoundFromShortToDouble(short[] soundData, double[] micBufferData) {
-		//Conversion from short to double
-	    final int bytesPerSample = 2; // As it is 16bit PCM
-	    final double amplification = 100.0; // choose a number as you like
-	    
-	    int length = 0;
-	    
-	    for (int soundIndex = 0, micBufferDataIndex = 0; soundIndex < recordingBufSize - bytesPerSample + 1; soundIndex += bytesPerSample, micBufferDataIndex++) {
-	        double sample = 0;
-	        for (int b = 0; b < bytesPerSample; b++) {
-	            int v = soundData[soundIndex + b];
-	            if (b < bytesPerSample - 1 || bytesPerSample == 1) {
-	                v &= 0xFF;
-	            }
-	            sample += v << (b * 8);
-	        }
-	        double sample32 = amplification * (sample / 32768.0);
-	        micBufferData[micBufferDataIndex] = sample32;
-	        length++;
-	    }
-	    
-	    return length;
-	}
 }
