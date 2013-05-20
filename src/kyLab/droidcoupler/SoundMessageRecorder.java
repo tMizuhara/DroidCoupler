@@ -11,6 +11,7 @@ public class SoundMessageRecorder {
 	private SoundBinaryDecoder decoder;
 	private int recordingBufSize = 0;
 	private boolean canDecodeMessageSound = false;
+	private static int BUF_SIZE_NECESSARY_FOR_VOTE = 4;
 	
 	public boolean isRecordingSuccess = false;
 	public boolean isRecordingStop = false;
@@ -34,48 +35,48 @@ public class SoundMessageRecorder {
 	public void recordSoundMessage() {
 		// start recording
 		Log.d("SoundMessageRecoder", "startRecording");
-		if (audioRec.getState()==android.media.AudioRecord.STATE_INITIALIZED) // check to see if the recorder has initialized yet.
-		if (audioRec.getRecordingState()==android.media.AudioRecord.RECORDSTATE_STOPPED)
-		audioRec.startRecording();
+		if (audioRec.getState()==android.media.AudioRecord.STATE_INITIALIZED) { // check to see if the recorder has initialized yet.
+			if (audioRec.getRecordingState()==android.media.AudioRecord.RECORDSTATE_STOPPED) {
+				audioRec.startRecording();
+			}
+		}
+		
 		// recording thread
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				byte buf[] = new byte[recordingBufSize];
+				byte recordingBuf[] = new byte[recordingBufSize];
 				while (!(isRecordingSuccess || isRecordingStop)) {
-					audioRec.read(buf, 0, buf.length);
-					for (int index = 0; index < recordingBufSize; index++) {
+					audioRec.read(recordingBuf, 0, recordingBuf.length);
+					//for (int index = 0; index < recordingBufSize; index++) {
 						//Log.d("SoundMessageRecoder", "buf:" + index + ":" + buf[index]);
-					}
+					//}
 					//Log.d("SoundMessageRecoder", "read " + buf.length + " bytes");
-					
-					double[] micBufferData = new double[recordingBufSize];//size may need to change
+					double[] micBufferData = new double[recordingBufSize];
 					
 					//int length = convertSoundFromShortToDouble(buf, micBufferData);;
 					//Log.d("SoundMessageRecoder", "length:" + length);
 					for (int index = 0; index < recordingBufSize; index++) {
-						micBufferData[index] = (double)buf[index];
+						micBufferData[index] = (double)recordingBuf[index];
 					}
-					Log.d("SoundMessageRecoder", "micBuffer:" + micBufferData.length);
 				    
-					int outIndex = 0;
-					
+					int recordingBinaryDataIndex = 0;
 					for (int micBufferDataIndex = 0; micBufferDataIndex < micBufferData.length; ) {
 						if (canDecodeMessageSound) {
-							byte[] results = new byte[4];
-							for (int resultNum = 0; resultNum < 4; resultNum++) {
+							byte[] results = new byte[BUF_SIZE_NECESSARY_FOR_VOTE];
+							for (int resultNum = 0; resultNum < BUF_SIZE_NECESSARY_FOR_VOTE; resultNum++) {
 								double[] decodeSoundData = new double[SoundParam.FFT_SIZE];
 								for (int i = 0; i < SoundParam.FFT_SIZE; i++) {
 									decodeSoundData[i] = micBufferData[micBufferDataIndex++];
 								}
 								results[resultNum] = decoder.decSoundByte(decodeSoundData);
 							}
-						    recordingBinaryData[outIndex] = decoder.vote(results);
-						    Log.d("SoundMessageRecoder", "out:" + recordingBinaryData[outIndex]);
-						    if (recordingBinaryData[outIndex] == 2) {
+						    recordingBinaryData[recordingBinaryDataIndex] = decoder.vote(results);
+						    Log.d("SoundMessageRecoder", "out:" + recordingBinaryData[recordingBinaryDataIndex]);
+						    if (recordingBinaryData[recordingBinaryDataIndex] == 2) {
 						    	isRecordingSuccess = true;
 						    }
-						    outIndex++;
+						    recordingBinaryDataIndex++;
 						} else {
 							double[] decodeSoundData = new double[SoundParam.FFT_SIZE];
 							for (int j = 0; j < SoundParam.FFT_SIZE; j++) {
@@ -84,11 +85,12 @@ public class SoundMessageRecorder {
 							}
 							canDecodeMessageSound = decoder.checkStart(decodeSoundData);
 							if (canDecodeMessageSound) {
-								byte[] results = new byte[4];
-								for (int resultNum = 0; resultNum < 4; resultNum++) {
+								Log.d("SoundMessageRecoder", "message start");
+								byte[] results = new byte[BUF_SIZE_NECESSARY_FOR_VOTE];
+								for (int resultNum = 0; resultNum < BUF_SIZE_NECESSARY_FOR_VOTE; resultNum++) {
 									results[resultNum] = decoder.decSoundByte(decodeSoundData);
 								}
-							    recordingBinaryData[outIndex++] = decoder.vote(results);
+							    recordingBinaryData[recordingBinaryDataIndex++] = decoder.vote(results);
 							}
 						}
 					}
